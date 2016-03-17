@@ -1,6 +1,6 @@
 # MariaDB 10 (https://mariadb.org/)
 
-FROM ubuntu:precise
+FROM ubuntu:trusty
 MAINTAINER Jonathan Miller <jonathan.michael.miller@gmail.com>
 
 RUN echo "deb http://archive.ubuntu.com/ubuntu precise main universe" > /etc/apt/sources.list
@@ -15,11 +15,11 @@ ENV LC_ALL     en_US.UTF-8
 
 # Install MariaDB from repository.
 RUN DEBIAN_FRONTEND=noninteractive && \
-    echo 'mariadb-server-10.0 mysql-server/root_password password password1' | debconf-set-selections && \
-    echo 'mariadb-server-10.0 mysql-server/root_password_again password password1' | debconf-set-selections && \
-    apt-get -y install python-software-properties && \
+    echo 'mariadb-server-10.1 mysql-server/root_password password password1' | debconf-set-selections && \
+    echo 'mariadb-server-10.1 mysql-server/root_password_again password password1' | debconf-set-selections && \
+    apt-get -y install software-properties-common && \
     apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xcbcb082a1bb943db && \
-    add-apt-repository 'deb http://mirror.jmu.edu/pub/mariadb/repo/10.0/ubuntu precise main' && \
+    add-apt-repository 'deb [arch=amd64,i386] http://nyc2.mirrors.digitalocean.com/mariadb/repo/10.1/ubuntu trusty main' && \
     apt-get update && \
     apt-get install -y mariadb-server && \
     apt-get install -y pwgen inotify-tools
