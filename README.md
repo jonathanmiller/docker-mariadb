@@ -1,29 +1,18 @@
 # docker-mariadb
 
-A Dockerfile that produces a container that will run [MariaDB][mariadb] 5.5,
+A Dockerfile that produces a container that will run [MariaDB][mariadb] 10.1,
 a drop-in replacement for MySQL.
 
 [mariadb]: https://mariadb.org/
 
 ## Image Creation
 
-This example creates the image with the tag `paintedfox/mariadb`, but you can
-change this to use your own username.
-
 ```
-$ docker build -t="paintedfox/mariadb" .
+$ docker build .
 ```
-
-Alternately, you can run the following if you have *make* installed...
-
+or
 ```
-$ make
-```
-
-You can also specify a custom docker username like so:
-
-```
-$ make DOCKER_USER=paintedfox
+$ docker build github.com/jonathanmiller/docker-mariadb
 ```
 
 ## Container Creation / Running
@@ -48,13 +37,7 @@ $ docker run -d -name="mariadb" \
              -v /tmp/mariadb:/data \
              -e USER="super" \
              -e PASS="$(pwgen -s -1 16)" \
-             paintedfox/mariadb
-```
-
-Alternately, you can run the following if you have *make* installed...
-
-``` shell
-$ make run
+             github.com/jonathanmiller/docker-mariadb
 ```
 
 You can also specify a custom port to bind to on the host, a custom data
@@ -72,7 +55,7 @@ $ make run PORT=127.0.0.1:3306 \
 
 To connect to the MariaDB server, you will need to make sure you have a client.
 You can install the `mysql-client` on your host machine by running the
-following (Ubuntu 12.04LTS):
+following (Ubuntu 14.04LTS):
 
 ``` shell
 $ sudo apt-get install mysql-client
